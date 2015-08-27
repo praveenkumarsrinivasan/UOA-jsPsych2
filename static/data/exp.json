@@ -2,11 +2,13 @@
     "prt_retry_times": 5,
     "mem_retry_times" : 5,
     "meta_retry_times" : 5,
+    "meta2_retry_times" : 5,
     "questionaire_retry_times": 5,
 
     "prt_min_points": 1,
     "mem_min_points": 1,
     "meta_min_points": 2,
+    "meta2_min_points": 0,
     "questionaire_min_points": 2,
 
     "test_retry_times" : 56,

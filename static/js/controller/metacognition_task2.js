@@ -4,24 +4,11 @@
  *
  */
 
-var metacognition_task_exp = function(appModel) {
+var metacognition_task2_exp = function(appModel) {
 
-    //get a random image from the list of bird pics in repository
-    //range of bird images in repo
-    var memory_bird_range = appModel.attributes.exp_configCollection.at(0).attributes.memory_bird_range;
     //random pic to be displayed
-    var memory_bird_number = Math.floor((Math.random() * memory_bird_range) + 1);
-    var memory_image_numbers = [];
-
-    //random list of bird images chosen to be displayed for the trial
-    memory_image_numbers.push(memory_bird_number);
-    while (memory_image_numbers.length < 3) {
-        var val = Math.floor((Math.random() * memory_bird_range) + 1);
-        if (_.indexOf(memory_image_numbers, val) == -1) {
-            memory_image_numbers.push(val);
-        }
-    }
-    memory_image_numbers = _.shuffle(memory_image_numbers);
+    var memory_bird_number = '1';
+    var memory_image_numbers = ['2', '3', '4'];
 
     //compile the html templates
     var memory_bird_template = _.template(appModel.attributes.memory_bird);
@@ -99,8 +86,8 @@ var metacognition_task_exp = function(appModel) {
                 //if user choses the right image then display the correct template
                 if (getResponse()) {
                     //award them 1 point
-                    appModel.attributes.meta_exp_points++;
-                    appModel.attributes.total_points++;
+                    appModel.attributes.meta2_exp_points++;
+                    //appModel.attributes.total_points++;
                     return _.template(appModel.attributes.correct)({'correct_msg': ''});
                 }
                 //else display the incorrect template
@@ -113,8 +100,8 @@ var metacognition_task_exp = function(appModel) {
                 //50% of the time award them '1' point
                 var prob = Math.floor((Math.random() * 2) + 1);
                 if (prob == 2) {
-                    appModel.attributes.meta_exp_points++;
-                    appModel.attributes.total_points++;
+                    //appModel.attributes.meta2_exp_points++;
+                    //appModel.attributes.total_points++;
                 }
                 return appModel.attributes.maybe;
             }
@@ -217,19 +204,19 @@ var metacognition_task_exp = function(appModel) {
         experiment_structure: experiment_blocks,
         on_finish: function() {
             //count the number of times the exp runs
-            appModel.attributes.meta_retry_times++;
+            appModel.attributes.meta2_retry_times++;
 
             //if the user reaches 5 points in 8 trials then call test exp
             //else call exp_fail
 
             //if the number of trails exceed 8 trials then call exp_fail
-            if (appModel.attributes.meta_retry_times >= appModel.attributes.exp_configCollection.at(0).attributes.meta_retry_times) {
+            if (appModel.attributes.meta2_retry_times >= appModel.attributes.exp_configCollection.at(0).attributes.meta2_retry_times) {
                 exp_fail(appModel);
                 return;
             }
 
             //if the user reaches 5 points then call test exp
-            if (appModel.attributes.meta_exp_points == appModel.attributes.exp_configCollection.at(0).attributes.meta_min_points) {
+            if (appModel.attributes.meta2_exp_points == appModel.attributes.exp_configCollection.at(0).attributes.meta2_min_points) {
                 //call test exp
                 //appModel.attributes.test_random_val = Math.floor((Math.random() * 2) + 1);
                 //if (appModel.attributes.test_random_val == 1) {
@@ -238,12 +225,12 @@ var metacognition_task_exp = function(appModel) {
                     //testing_priming_task_exp(appModel);
                 //}
 
-                metacognition_task2_exp(appModel);
-                //questionaire_task_exp(appModel);
+                questionaire_task_exp(appModel);
             }
             //else restart the test.
             else {
-                metacognition_task_exp(appModel);
+                appModel.attributes.meta2_exp_points = 0;
+                metacognition_task2_exp(appModel);
             }
         },
         on_data_update: function(data) {
@@ -252,3 +239,4 @@ var metacognition_task_exp = function(appModel) {
     });
 
 }
+

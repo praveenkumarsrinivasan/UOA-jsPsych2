@@ -6,6 +6,7 @@ require(
         'static/js/controller/prt_task.js',
         'static/js/controller/memory_task.js',
         'static/js/controller/metacognition_task.js',
+        'static/js/controller/metacognition_task2.js',
         'static/js/controller/questionaire_task.js',
         'static/js/controller/testing_task.js',
         'static/js/controller/testing_priming_task.js',
@@ -43,7 +44,7 @@ require(
     function(
         ConfigCollection, AppModel,
         flow,
-        prt_task, memory_task, metacognition_task, questionaire_task, testing_task, testing_priming_task,
+        prt_task, memory_task, metacognition_task, metacognition_task2, questionaire_task, testing_task, testing_priming_task,
         text, header,
         prt_title, memory_title, meta_title, test_title, priming_title,
         prt_welcome, prt_intro_instruction,
@@ -121,6 +122,7 @@ require(
                     prt_exp_points : 0,
                     mem_exp_points : 0,
                     meta_exp_points : 0,
+                    meta2_exp_points : 0,
                     questionaire_exp_points : 0,
 
                     test_exp_points : 0,
@@ -129,6 +131,7 @@ require(
                     prt_retry_times : 0,
                     mem_retry_times : 0,
                     meta_retry_times : 0,
+                    meta2_retry_times : 0,
 
                     questionaire_retry_times : 0,
                     questionaire1_correct_ans : 1,
