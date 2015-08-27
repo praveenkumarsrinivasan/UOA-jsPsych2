@@ -142,10 +142,10 @@ var testing_task_exp = function(appModel) {
                         //award them '1' point
                         appModel.attributes.test_exp_points++;
                         appModel.attributes.total_points++;
-                        return appModel.attributes.correct;
+                        return _.template(appModel.attributes.correct)({'correct_msg': ''});
                     } else {
                         //the user is confident and incorrect
-                        return appModel.attributes.incorrect;
+                        return _.template(appModel.attributes.incorrect)({'wrong_msg': ''});
                     }
                 } else {
                     //the user chose cloud
@@ -167,10 +167,10 @@ var testing_task_exp = function(appModel) {
                         //award them '1' point
                         appModel.attributes.test_exp_points++;
                         appModel.attributes.total_points++;
-                        return appModel.attributes.correct;
+                        return _.template(appModel.attributes.correct)({'correct_msg': ''});
                     } else {
                         //the user is confident and incorrect
-                        return appModel.attributes.incorrect;
+                        return _.template(appModel.attributes.incorrect)({'wrong_msg': ''});
                     }
                 } else {
                     //the user is not confident
@@ -228,7 +228,7 @@ var testing_task_exp = function(appModel) {
 
         //get the image number of the bird displayed
         var re1 = /(\d* condition.png)/gi; // regex to match displayed image
-        var re2 = /(\d* (original|manipulation|manipulation x).png)/gi; // regex to match 
+        var re2 = /(\d* (original|manipulation|manipulation x).png)/gi; // regex to match
         //console.log(trials);
         //console.log(current_trial);
         var num = (trials[current_trial - 2].stimulus).match(re1);

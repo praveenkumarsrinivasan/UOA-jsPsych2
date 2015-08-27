@@ -154,10 +154,10 @@ var testing_priming_task_exp = function(appModel) {
                         //award them '1' point
                         appModel.attributes.test_priming_exp_points++;
                         appModel.attributes.total_points++;
-                        return appModel.attributes.correct;
+                        return _.template(appModel.attributes.correct)({'correct_msg': ''});
                     } else {
                         //the user is confident and incorrect
-                        return appModel.attributes.incorrect;
+                        return _.template(appModel.attributes.incorrect)({'wrong_msg': ''});
                     }
                 } else {
                     //the user chose cloud
@@ -180,10 +180,10 @@ var testing_priming_task_exp = function(appModel) {
                         //award them '1' point
                         appModel.attributes.test_priming_exp_points++;
                         appModel.attributes.total_points++;
-                        return appModel.attributes.correct;
+                        return _.template(appModel.attributes.correct)({'correct_msg': ''});
                     } else {
                         //the user is confident and incorrect
-                        return appModel.attributes.incorrect;
+                        return _.template(appModel.attributes.incorrect)({'wrong_msg': ''});
                     }
                 } else {
                     //the user is not confident

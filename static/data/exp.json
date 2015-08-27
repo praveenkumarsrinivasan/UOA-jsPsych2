@@ -1,12 +1,12 @@
 {
     "prt_retry_times": 5,
     "mem_retry_times" : 5,
-    "meta_retry_times" : 8,
+    "meta_retry_times" : 5,
     "questionaire_retry_times": 5,
 
     "prt_min_points": 1,
     "mem_min_points": 1,
-    "meta_min_points": 5,
+    "meta_min_points": 2,
     "questionaire_min_points": 2,
 
     "test_retry_times" : 56,

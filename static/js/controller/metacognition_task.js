@@ -101,11 +101,11 @@ var metacognition_task_exp = function(appModel) {
                     //award them 1 point
                     appModel.attributes.meta_exp_points++;
                     appModel.attributes.total_points++;
-                    return appModel.attributes.correct;
+                    return _.template(appModel.attributes.correct)({'correct_msg': ''});
                 }
                 //else display the incorrect template
                 else {
-                    return appModel.attributes.incorrect;
+                    return _.template(appModel.attributes.incorrect)({'wrong_msg': ''});
                 }
             }
             //if the user is not confident then display the half moon template

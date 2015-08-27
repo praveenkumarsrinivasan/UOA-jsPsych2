@@ -105,11 +105,11 @@ var memory_task_exp = function(appModel) {
                 //if the user succeeds then award them '1' point 
                 appModel.attributes.mem_exp_points++;
                 appModel.attributes.total_points++;
-                return appModel.attributes.correct;
+                return _.template(appModel.attributes.correct)({'correct_msg': ''});
             }
             //else display the incorrect template
             else {
-                return appModel.attributes.incorrect;
+                return _.template(appModel.attributes.incorrect)({'wrong_msg': ''});
             }
         },
         cont_key: "mouse"
