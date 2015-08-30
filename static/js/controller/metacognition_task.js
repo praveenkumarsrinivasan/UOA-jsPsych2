@@ -6,6 +6,7 @@
 
 var metacognition_task_exp = function(appModel) {
 
+    var star_flag = 0;
     //get a random image from the list of bird pics in repository
     //range of bird images in repo
     var memory_bird_range = appModel.attributes.exp_configCollection.at(0).attributes.memory_bird_range;
@@ -40,7 +41,7 @@ var metacognition_task_exp = function(appModel) {
     //define the blocks of the experiment
     var exp_name_block = {
         type: "text",
-        text: appModel.attributes.meta_title,
+        text: appModel.attributes.meta_title + "1",
         cont_key: "mouse"
     };
 
@@ -96,6 +97,7 @@ var metacognition_task_exp = function(appModel) {
         text: function() {
             //if the user is confident
             if (getConfidence()) {
+                star_flag = 1;
                 //if user choses the right image then display the correct template
                 if (getResponse()) {
                     //award them 1 point
@@ -110,11 +112,14 @@ var metacognition_task_exp = function(appModel) {
             }
             //if the user is not confident then display the half moon template
             else {
+                star_flag = 0;
                 //50% of the time award them '1' point
                 var prob = Math.floor((Math.random() * 2) + 1);
+                    appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_lost;
                 if (prob == 2) {
-                    appModel.attributes.meta_exp_points++;
-                    appModel.attributes.total_points++;
+                    appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_won;
+                    //appModel.attributes.meta_exp_points++;
+                    //appModel.attributes.total_points++;
                 }
                 return appModel.attributes.maybe;
             }
@@ -128,7 +133,8 @@ var metacognition_task_exp = function(appModel) {
             var template = _.template(appModel.attributes.response_time);
             return template({
                 'response_time': getAverageResponseTime(),
-                'total_score': appModel.attributes.total_points
+                'change_in_points': appModel.attributes.response_change_in_points,
+                'total_points': appModel.attributes.total_points
             });
         },
         cont_key: "mouse"
@@ -171,8 +177,10 @@ var metacognition_task_exp = function(appModel) {
         }
 
         if (image_num == choice) {
+            appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_won;
             return true;
         } else {
+            appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_lost;
             return false;
         }
     }
@@ -228,18 +236,20 @@ var metacognition_task_exp = function(appModel) {
                 return;
             }
 
-            //if the user reaches 5 points then call test exp
-            if (appModel.attributes.meta_exp_points == appModel.attributes.exp_configCollection.at(0).attributes.meta_min_points) {
-                //call test exp
-                //appModel.attributes.test_random_val = Math.floor((Math.random() * 2) + 1);
-                //if (appModel.attributes.test_random_val == 1) {
+            if (star_flag == 1) {
+                //if the user reaches 5 points then call test exp
+                //if (appModel.attributes.meta_exp_points == appModel.attributes.exp_configCollection.at(0).attributes.meta_min_points) {
+                    //call test exp
+                    //appModel.attributes.test_random_val = Math.floor((Math.random() * 2) + 1);
+                    //if (appModel.attributes.test_random_val == 1) {
                     //testing_task_exp(appModel);
-                //} else {
+                    //} else {
                     //testing_priming_task_exp(appModel);
-                //}
+                    //}
 
-                metacognition_task2_exp(appModel);
-                //questionaire_task_exp(appModel);
+                    metacognition_task2_exp(appModel);
+                    //questionaire_task_exp(appModel);
+                //}
             }
             //else restart the test.
             else {

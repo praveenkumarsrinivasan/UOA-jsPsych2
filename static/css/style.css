@@ -16,11 +16,20 @@
     margin-top: 48px;
 }
 
+
 .glyphicon-lg {
-    font-size: 5em;
+    font-size: 7em;
+}
+
+.fa7x {
+    font-size: 7em;
 }
 
 #exp_target {
+    border: 1px solid #dcdcdc;
+    padding: 20px;
+    min-height: 300px;
+    border-radius: 5px;
     text-align: center;
 }
 

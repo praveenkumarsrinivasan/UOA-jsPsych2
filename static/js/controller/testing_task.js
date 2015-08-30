@@ -92,42 +92,48 @@ var testing_task_exp = function(appModel) {
 
     //picl between star, cloud and star_cloud blocks in the below mentioned probabilities
     //star - 25%, cloud - 25%, star_cloud - 50%
-    var star_n_cloud_block = {};
-    var val = Math.floor((Math.random() * 4) + 1);
-    switch (val) {
-        case 1:
-            star_n_cloud_block = {
-                type: "text",
-                text: appModel.attributes.star,
-                cont_key: "mouse"
-            }
-            break;
-        case 2:
-            star_n_cloud_block = {
-                type: "text",
-                text: appModel.attributes.cloud,
-                cont_key: "mouse"
-            }
-            break;
-        case 3:
-            star_n_cloud_block = {
-                type: "single-stim",
-                stimuli: [appModel.attributes.star_cloud],
-                is_html: true,
-                choices: [49, 50]
-            };
-            break;
-        case 4:
-            star_n_cloud_block = {
-                type: "single-stim",
-                stimuli: [appModel.attributes.star_cloud],
-                is_html: true,
-                choices: [49, 50]
-            };
-            break;
-        default:
-            break;
-    }
+    //var star_n_cloud_block = {};
+    //var val = Math.floor((Math.random() * 4) + 1);
+    //switch (val) {
+        //case 1:
+            //star_n_cloud_block = {
+                //type: "text",
+                //text: appModel.attributes.star,
+                //cont_key: "mouse"
+            //}
+            //break;
+        //case 2:
+            //star_n_cloud_block = {
+                //type: "text",
+                //text: appModel.attributes.cloud,
+                //cont_key: "mouse"
+            //}
+            //break;
+        //case 3:
+            //star_n_cloud_block = {
+                //type: "single-stim",
+                //stimuli: [appModel.attributes.star_cloud],
+                //is_html: true,
+                //choices: [49, 50]
+            //};
+            //break;
+        //case 4:
+            //star_n_cloud_block = {
+                //type: "single-stim",
+                //stimuli: [appModel.attributes.star_cloud],
+                //is_html: true,
+                //choices: [49, 50]
+            //};
+            //break;
+        //default:
+            //break;
+    //}
+    var star_n_cloud_block = {
+        type: "single-stim",
+        stimuli: [appModel.attributes.star_cloud],
+        is_html: true,
+        choices: [49, 50]
+    };
 
     var response_block = {
         type: "text",
@@ -193,7 +199,8 @@ var testing_task_exp = function(appModel) {
             var template = _.template(appModel.attributes.response_time);
             return template({
                 'response_time': getAverageResponseTime().response_time,
-                'total_score': appModel.attributes.total_points
+                'change_in_points': appModel.attributes.response_change_in_points,
+                'total_points': appModel.attributes.total_points
             });
         },
         cont_key: "mouse"
@@ -247,8 +254,10 @@ var testing_task_exp = function(appModel) {
         }
 
         if (image_num == choice) {
+            appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_won;
             return true;
         } else {
+            appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_lost;
             return false;
         }
     }

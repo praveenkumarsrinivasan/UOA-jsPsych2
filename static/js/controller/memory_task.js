@@ -121,7 +121,8 @@ var memory_task_exp = function(appModel) {
             var template = _.template(appModel.attributes.response_time);
             return template({
                 'response_time': getAverageResponseTime(),
-                'total_score': appModel.attributes.total_points
+                'change_in_points': appModel.attributes.response_change_in_points,
+                'total_points': appModel.attributes.total_points
             });
         },
         cont_key: "mouse"
@@ -147,8 +148,10 @@ var memory_task_exp = function(appModel) {
         var choice = parseInt(num[key_press].toLowerCase().replace('.png', ''), 10);
 
         if (image_num == choice) {
+            appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_won;
             return true;
         } else {
+            appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_lost;
             return false;
         }
     }
@@ -185,7 +188,7 @@ var memory_task_exp = function(appModel) {
     //experiment_blocks.push(slider_function_block);
     //experiment_blocks.push(instructions_block2);
     experiment_blocks.push(images_block);
-    experiment_blocks.push(star_block);
+    //experiment_blocks.push(star_block);
     experiment_blocks.push(response_block);
     experiment_blocks.push(debrief_block);
 

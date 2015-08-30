@@ -12,6 +12,7 @@ require(
         'static/js/controller/testing_priming_task.js',
         'text',
         'text!header.html',
+        'text!exp/exp_points.html',
         'text!exp/prt_title.html',
         'text!exp/memory_title.html',
         'text!exp/meta_title.html',
@@ -46,6 +47,7 @@ require(
         flow,
         prt_task, memory_task, metacognition_task, metacognition_task2, questionaire_task, testing_task, testing_priming_task,
         text, header,
+        exp_points,
         prt_title, memory_title, meta_title, test_title, priming_title,
         prt_welcome, prt_intro_instruction,
         memory_instruction1, memory_instruction2, memory_bird, memory_images,
@@ -75,6 +77,8 @@ require(
                 var appModel = new AppModel({
                     //exp config
                     exp_configCollection : exp_configCollection,
+
+                    exp_points: exp_points,
 
                     //title
                     prt_title     : prt_title,
@@ -139,6 +143,8 @@ require(
 
                     test_retry_times : 0,
                     test_priming_retry_times : 0,
+
+                    response_change_in_points: '',
 
                     test_random_val : 0,
                     testing_configCollection : testing_configCollection,

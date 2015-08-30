@@ -60,11 +60,11 @@ var questionaire_task_exp = function(appModel) {
             if (getResponse(appModel.attributes.questionaire2_correct_ans)) {
                 //award them 1 point
                 questionaire_exp_points++;
-                return appModel.attributes.correct;
+                return _.template(appModel.attributes.correct)({'correct_msg': ''});
             }
             //else display the incorrect template
             else {
-                return appModel.attributes.incorrect;
+                return _.template(appModel.attributes.incorrect)({'wrong_msg': ''});
             }
         },
         cont_key: "mouse"

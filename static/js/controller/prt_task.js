@@ -10,6 +10,12 @@ var prt_task_exp = function(appModel) {
     var res;
 
     //define blocks of the experiment
+    var points_block = {
+        type: "text",
+        text: appModel.attributes.exp_points,
+        cont_key: "mouse"
+    };
+
     var exp_name_block = {
         type: "text",
         text: appModel.attributes.prt_title,
@@ -49,12 +55,28 @@ var prt_task_exp = function(appModel) {
         timing_post_trial: appModel.attributes.exp_configCollection.at(0).attributes.prt_timing_post_trial,
     };
 
+    var response_block_single = {
+        type: "text",
+        text: function() {
+            res = getAverageResponseTime_single();
+            if (1 == res.valid_trial_count) {
+                //if the user succeeds then award them '1' point
+                return _.template(appModel.attributes.correct)({'correct_msg': ''});
+            }
+            //else display the incorrect template
+            else {
+                return _.template(appModel.attributes.incorrect)({'wrong_msg': ''});
+            }
+        },
+        cont_key: "mouse"
+    };
+
     var response_block = {
         type: "text",
         text: function() {
             res = getAverageResponseTime();
             if (appModel.attributes.exp_configCollection.at(0).attributes.prt_slider_timing_trials.length == res.valid_trial_count) {
-                //if the user succeeds then award them '1' point 
+                //if the user succeeds then award them '1' point
                 return _.template(appModel.attributes.correct)({'correct_msg': ''});
             }
             //else display the incorrect template
@@ -71,10 +93,46 @@ var prt_task_exp = function(appModel) {
             var template = _.template(appModel.attributes.response_time);
             return template({
                 'response_time': res.response_time,
-                'total_score': appModel.attributes.total_points
+                'change_in_points': appModel.attributes.response_change_in_points,
+                'total_points': appModel.attributes.total_points
             });
         },
         cont_key: "mouse"
+    }
+
+    //function to compute the average response time
+    //for trials where handle was clicked
+    var getAverageResponseTime_single = function() {
+        var trials = jsPsych.data.getTrialsOfType('slider');
+
+        var sum_rt = 0;
+        var valid_trial_count = 0;
+
+        var current_trial = 0;
+        if (trials.length > 0) {
+            current_trial = trials.length - 1;
+        }
+
+        for (var i = current_trial; i < trials.length; i++) {
+            if (trials[i].r_type == 'handle_clicked' && trials[i].rt > -1) {
+                sum_rt += trials[i].rt;
+                valid_trial_count++;
+            }
+        }
+
+        //if the user succeeds then award them '1' point
+        if (1 == valid_trial_count) {
+            appModel.attributes.prt_exp_points++;
+            appModel.attributes.total_points++;
+            appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_won;
+        } else {
+            appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_lost;
+        }
+
+        return {
+            response_time: Math.floor(sum_rt / valid_trial_count),
+            valid_trial_count: valid_trial_count,
+        }
     }
 
     //function to compute the average response time
@@ -112,13 +170,14 @@ var prt_task_exp = function(appModel) {
 
     //blocks in the experiment
     var experiment_blocks = [];
+    experiment_blocks.push(points_block);
     experiment_blocks.push(exp_name_block);
-    experiment_blocks.push(welcome_block);
+    //experiment_blocks.push(welcome_block);
     experiment_blocks.push(instructions_block);
-    experiment_blocks.push(slider_function_block1);
     experiment_blocks.push(dot_block);
-    experiment_blocks.push(slider_function_block2);
-    experiment_blocks.push(response_block);
+    experiment_blocks.push(slider_function_block1);
+    //experiment_blocks.push(slider_function_block2);
+    experiment_blocks.push(response_block_single);
     experiment_blocks.push(debrief_block);
 
     jsPsych.init({
