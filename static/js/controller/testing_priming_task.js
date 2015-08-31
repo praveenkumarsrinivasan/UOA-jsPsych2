@@ -324,7 +324,7 @@ var testing_priming_task_exp = function(appModel) {
             if (appModel.attributes.test_retry_times >= appModel.attributes.exp_configCollection.at(0).attributes.test_retry_times) {
                 psiturk.saveData({
                     success: function() {
-                        thanks_task_exp();
+                        thanks_task_exp(appModel);
                         //compute_award(appModel);
                     },
                     error: function() {
