@@ -196,8 +196,8 @@ var prt_task_exp = function(appModel) {
             //if user reaches '1' point i.e prt_min_points call mem exp
             if (appModel.attributes.prt_exp_points == appModel.attributes.exp_configCollection.at(0).attributes.prt_min_points) {
                 //call mem exp
-                //memory_task_exp(appModel);
-                thanks_task_exp(appModel);
+                memory_task_exp(appModel);
+                //thanks_task_exp(appModel);
                 //testing_priming_task_exp(appModel);
                 
             }

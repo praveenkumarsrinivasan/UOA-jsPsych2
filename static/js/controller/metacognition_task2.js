@@ -119,7 +119,8 @@ var metacognition_task2_exp = function(appModel) {
         text: function() {
             var template = _.template(appModel.attributes.response_time);
             return template({
-                'response_time': getAverageResponseTime(),
+                //'response_time': getAverageResponseTime(),
+                'response_time': '',
                 'change_in_points': appModel.attributes.response_change_in_points,
                 'total_points': appModel.attributes.total_points
             });
