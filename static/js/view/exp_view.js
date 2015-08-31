@@ -10,6 +10,7 @@ require(
         'static/js/controller/questionaire_task.js',
         'static/js/controller/testing_task.js',
         'static/js/controller/testing_priming_task.js',
+        'static/js/controller/thanks_task.js',
         'text',
         'text!header.html',
         'text!exp/exp_points.html',
@@ -41,11 +42,12 @@ require(
         'text!exp/maybe.html',
         'text!exp/exp_fail.html',
         'text!exp/exp_complete.html',
+        'text!thanks/thanks_task.html',
     ],
     function(
         ConfigCollection, AppModel,
         flow,
-        prt_task, memory_task, metacognition_task, metacognition_task2, questionaire_task, testing_task, testing_priming_task,
+        prt_task, memory_task, metacognition_task, metacognition_task2, questionaire_task, testing_task, testing_priming_task, thanks_task,
         text, header,
         exp_points,
         prt_title, memory_title, meta_title, test_title, priming_title,
@@ -55,7 +57,8 @@ require(
         questionaire_title, questionaire1, questionaire2,
         testing_bird, testing_bird_large, testing_images,
         response_time, star, star_cloud, cloud, dot, correct, incorrect, maybe,
-        exp_fail, exp_complete) {
+        exp_fail, exp_complete,
+        thanks_task) {
 
         var header_template = _.template(header);
         $('#header_template').html(header_template);
@@ -148,6 +151,8 @@ require(
 
                     test_random_val : 0,
                     testing_configCollection : testing_configCollection,
+
+                    thanks_task: thanks_task,
                 });
 
                 exp_flow(appModel);

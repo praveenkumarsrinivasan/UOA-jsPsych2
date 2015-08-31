@@ -1,7 +1,7 @@
 var exp_fail = function(appModel) {
     //- Thank you for your participation, however you have not met the criteria for this study
-    //- Give a code that sends them to a leaving screen 
-    //- compute their final award 
+    //- Give a code that sends them to a leaving screen
+    //- compute their final award
     var template = _.template(appModel.attributes.exp_fail);
     $('#exp-target').html(template({
         'fail_code': 'FAIL'
@@ -12,7 +12,7 @@ var compute_award = function(appModel) {
     //compute the final award for the participant
     //also compute bonus for the person with the highest score
 
-    //total points 
+    //total points
     //compute bonus
     complete();
 
@@ -23,7 +23,7 @@ var compute_award = function(appModel) {
 };
 
 //start exp process
-function exp_flow(appModel) {   
+function exp_flow(appModel) {
     prt_task_exp(appModel);
     //memory_task_exp(appModel);
     //metacognition_task_exp(appModel);

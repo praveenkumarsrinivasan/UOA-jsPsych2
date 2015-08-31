@@ -308,13 +308,14 @@ var testing_task_exp = function(appModel) {
             //after all the trails, compute the final award for the participant
             //also compute bonus for the person with the highest score
             if (appModel.attributes.test_retry_times >= appModel.attributes.exp_configCollection.at(0).attributes.test_retry_times) {
-                psiturk.saveData({
-                    success: function() {
-                        compute_award(appModel);
-                    },
-                    error: function() {
-                    }
-                });
+                thanks_task_exp();
+                //psiturk.saveData({
+                    //success: function() {
+                        //compute_award(appModel);
+                    //},
+                    //error: function() {
+                    //}
+                //});
             } else {
                 var val = appModel.attributes.testing_configCollection.at(0).attributes.allocation2[appModel.attributes.test_retry_times];
                 var allocation = allocationType[parseInt((val-1)/8, 10)];
