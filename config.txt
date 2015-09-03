@@ -1,13 +1,13 @@
 [HIT Configuration]
-title = Cognitive Intelligence
-description = Metacognition Experiment
-amt_keywords = Perception, Psychology
+title = Research Experiment
+description = ST Study 2015 
+amt_keywords = Psychology
 lifetime = 24
 us_only = false
-approve_requirement = 95
-contact_email_on_error = praveen.sxi@gmail.com
-ad_group = Cognitive Intelligence
-psiturk_keywords = cognitive_intelligence, metacognition, uoa, caledonian_project
+approve_requirement = 100
+contact_email_on_error = lcc.mturk@gmail.com
+ad_group = Psychology
+psiturk_keywords = academic, research, survey
 organization_name = University of Auckland
 browser_exclude_rule = MSIE
 
