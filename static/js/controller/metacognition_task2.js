@@ -104,7 +104,7 @@ var metacognition_task2_exp = function(appModel) {
                 var prob = Math.floor((Math.random() * 2) + 1);
                     appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_lost;
                 if (prob == 2) {
-                    appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_won;
+                    //appModel.attributes.response_change_in_points = appModel.attributes.exp_configCollection.at(0).attributes.response_won;
                     //appModel.attributes.meta2_exp_points++;
                     //appModel.attributes.total_points++;
                 }

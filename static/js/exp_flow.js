@@ -31,4 +31,5 @@ function exp_flow(appModel) {
     //questionaire_task_exp(appModel);
     //testing_task_exp(appModel);
     //testing_priming_task_exp(appModel);
+    //thanks_task_exp(appModel);
 }

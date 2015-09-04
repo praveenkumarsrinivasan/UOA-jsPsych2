@@ -1,5 +1,5 @@
 [HIT Configuration]
-title = Research Experiment
+title = Research Experiment UOA
 description = ST Study 2015 
 amt_keywords = Psychology
 lifetime = 24

@@ -1,0 +1,65 @@
+{
+    [
+        "points_block",
+        "exp_name_block",
+        "instructions_block",
+        "dot_block",
+        "slider_function_block1",
+        "response_block_single",
+        "debrief_block",
+
+        "exp_name_block",
+        "dot_block",
+        "instructions_block1",
+        "bird_block",
+        "images_block",
+        "response_block",
+        "debrief_block",
+
+        "exp_name_block",
+        "dot_block",
+        "bird_block",
+        "images_block",
+        "instructions_block",
+        "star_n_cloud_block",
+        "response_block",
+        "debrief_block",
+
+        "exp_name_block",
+        "dot_block",
+        "bird_block",
+        "images_block",
+        "instructions_block",
+        "star_n_cloud_block",
+        "response_block",
+        "debrief_block",
+
+        "exp_name_block",
+        "questionaire1_block",
+        "response1_block",
+        "questionaire2_block",
+        "response2_block",
+
+        "exp_name_block",
+        "dot_block",
+        "bird_block",
+        "slider_check_chunk_loop",
+        "images_block",
+        "star_n_cloud_block",
+        "response_block",
+        "debrief_block",
+
+        "exp_name_block",
+        "dot_block",
+        "bird_block1",
+        "dot_block",
+        "bird_block2",
+        "slider_check_chunk_loop",
+        "images_block",
+        "star_n_cloud_block",
+        "response_block",
+        "debrief_block",
+
+        "exp_name_block"
+    ]
+}

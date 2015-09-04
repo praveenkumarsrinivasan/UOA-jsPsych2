@@ -17,8 +17,23 @@
             self.close();
         }
 
+        function getQueryParams(qs) {
+            qs = qs.split('+').join(' ');
+
+            var params = {},
+                tokens,
+                re = /[?&]?([^=]+)=([^&]*)/g;
+
+            while (tokens = re.exec(qs)) {
+                params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+            }
+
+            return params;
+        }
+
         function startExp() {
-            window.location = 'exp?hitId={{ hitid }}&assignmentId={{ assignmentid }}&workerId={{ workerid }}';
+            var code = getQueryParams(document.location.search).code;
+            window.location = 'exp?hitId={{ hitid }}&assignmentId={{ assignmentid }}&workerId={{ workerid }}&code='+code;
         }
         </script>
         <div id="consent_template"></div>

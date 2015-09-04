@@ -1,12 +1,12 @@
 <!doctype html>
-<!-- 
+<!--
     The ad.html has a very specific format.
 
     Really there are two "ads" contained within this file.
 
     The first ad displays to participants who are browsing
     the Amazon Mechanical Turk site but have not yet accepted
-    your hit.  
+    your hit.
 
     The second part of the ad display after the person selected
     "Accept HIT" on the Amazon website.  This will reload the
@@ -15,7 +15,6 @@
     server (assuming it is running and accessible to the Internet).
 
     See comments throughout for hints
-
 -->
 <html>
     <head>
@@ -28,7 +27,7 @@
                 margin: 0px;
                 background-color: white;
                 color: black;
-                font-weight: 300; 
+                font-weight: 300;
                 font-size: 13pt;
             }
 
@@ -59,44 +58,44 @@
             <div id="ad">
                 <div class="row">
                     <div class="col-xs-2">
-                        <!-- REPLACE THE LOGO HERE WITH YOUR  UNIVERSITY, LAB, or COMPANY -->
                         <img id="adlogo" src="{{ server_location }}/static/images/uoa-logo-5.jpg" alt="Logo" />
                     </div>
                     <div class="col-xs-10">
-
-                            <!-- 
+                            <!--
                                 If assignmentid is "ASSIGNMENT_ID_NOT_AVAILABLE"
-                                it means the participant has NOT accepted your hit. 
+                                it means the participant has NOT accepted your hit.
                                 This should display the typical advertisement about
                                 your experiment: who can participate, what the
                                 payment is, the time, etc...
-
                             -->
                             {% if assignmentid == "ASSIGNMENT_ID_NOT_AVAILABLE" %}
 
                                 <h1>Call for participants</h1>
                                 <p>
-The School of Psychology at University of Auckland is looking for online participants for a brief psychology experiment. The only requirements are that you are at least 18 years old and are a fluent English speaker. The task will take 15 minutes and will pay $1.
+                                An approximately 40-50 minute research survey. Fluent English required. Pays  between $0.20-$5.00 depending on performance
+                                <br/>
+                                <br/>
+                                Step 1: Click on the Screening Button below. Complete the Screening. At the end of the screening you will be given a code copy the code and paste it on the MTurk HIT Page
+                                </p>
+                                <button type="button" class="btn btn-primary" onClick="window.open('https://www.surveymonkey.com/r/26VYKKF','_blank','resizable=yes')">Screening</button>
+                                <br/>
+                                <br/>
+                                <p>
+                                Step 2: After completing the Screening Please click the "Accept HIT" button at the 
+                                    bottom of the page to begin the task.
                                 </p>
                                 <div class="alert alert-danger">
-                                    <strong>This task can only be completed once.</strong> 
-                                    If you have already completed this task before the system will not 
-                                    allow you to run again. If this looks familiar please return the 
+                                    <strong>This task can only be completed once.</strong>
+                                    If you have already completed this task before the system will not
+                                    allow you to run again. If this looks familiar please return the
                                     HIT so someone else can participate.
                                 </div>
-                                <p>
-                                    Otherwise, please click the "Accept HIT" button on the Amazon site 
-                                    above to begin the task.
-                                </p>
-                                
-
                             {% else %}
-
-                                <!-- 
+                                <!--
                                     OTHERWISE
                                     If assignmentid is NOT "ASSIGNMENT_ID_NOT_AVAILABLE"
-                                    it means the participant has accepted your hit. 
-                                    You should thus show them instructions to begin the 
+                                    it means the participant has accepted your hit.
+                                    You should thus show them instructions to begin the
                                     experiment ... usually a button to launch a new browser
                                     window pointed at your server.
 
@@ -106,25 +105,36 @@ The School of Psychology at University of Auckland is looking for online partici
                                 -->
                                 <h1>Thank you for accepting this HIT!</h1>
                                 <p>
+                                Please paste the Code that was given at the end of the Screening in the texbox below.
+                                </p>
+                                <div class="alert alert-danger">
+                                Note: If you paste invalid or incomplete code you will not be paid.
+                                </div>
+                                Screening Code : <input type="text" id="code"/>
+                                <br/>
+                                <br/>
+                                <p>
                                     By clicking the following URL link, you will be taken to the experiment,
                                     including complete instructions and an informed consent agreement.
                                 </p>
                                 <script>
                                     function openwindow() {
-                                        popup = window.open('{{ server_location }}/consent?hitId={{ hitid }}&assignmentId={{ assignmentid }}&workerId={{ workerid }}','Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width='+1024+',height='+768+'');
+                                        var code = document.getElementById('code').value;
+                                        //popup = window.open('{{ server_location }}/consent?hitId={{ hitid }}&assignmentId={{ assignmentid }}&workerId={{ workerid }}','Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width='+1024+',height='+768+'');
+                                        popup = window.open('{{ server_location }}/consent?hitId={{ hitid }}&assignmentId={{ assignmentid }}&workerId={{ workerid }}&code='+code,'Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes');
                                     }
                                 </script>
                                 <div class="alert alert-warning">
                                     <b>Warning</b>: Please disable pop-up blockers before continuing.
                                 </div>
-                                
+
                                 <button type="button" class="btn btn-primary btn-lg" onClick="openwindow();">
                                   Begin Experiment
                                 </button>
 
 
                             {% endif %}
-                            <!-- 
+                            <!--
                                 endif
                             -->
                     </div>
